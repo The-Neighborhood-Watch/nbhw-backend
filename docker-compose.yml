@@ -24,5 +24,15 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: pytest
+    volumes:
+      - .:/app
+    depends_on:
+      - localdb
+
 volumes:
   db_data:

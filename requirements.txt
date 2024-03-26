@@ -9,7 +9,9 @@ Markdown==3.6
 psycopg2-binary==2.9.3
 PyJWT==2.8.0
 pytest==8.1.1
+pytest-mock==3.14.0
 python-dotenv==1.0.1
+requests==2.31.0
 setuptools==68.2.2
 sqlparse==0.4.2
 wheel==0.42.0

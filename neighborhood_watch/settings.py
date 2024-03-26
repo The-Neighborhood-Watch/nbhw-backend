@@ -51,7 +51,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-ROOT_URLCONF = "neighborhood-watch.urls"
+ROOT_URLCONF = "neighborhood_watch.urls"
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "neighborhood-watch.wsgi.application"
+WSGI_APPLICATION = "neighborhood_watch.wsgi.application"
 
 
 # Database
