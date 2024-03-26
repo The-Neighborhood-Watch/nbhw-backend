@@ -1,5 +1,7 @@
+import logging
+
 from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view
@@ -7,14 +9,24 @@ from rest_framework.response import Response
 
 from .serializers import UserSerializer
 
-import logging
-
 logger = logging.getLogger(__name__)
 
 
 @api_view(["POST"])
 def login(request):
-    return Response({"message": "You are logged in."})
+    username = request.data.get("username")
+    password = request.data.get("password")
+    user = get_object_or_404(User, username=username)
+    if not user.check_password(password):
+        return Response(
+            {"message": "Invalid credentials"}, status=status.HTTP_404_NOT_FOUND
+        )
+    token, created = Token.objects.get_or_create(user=user)
+
+    return Response(
+        {"token": token.key, "user": UserSerializer(user).data},
+        status=status.HTTP_200_OK,
+    )
 
 
 @api_view(["POST"])
@@ -33,7 +45,6 @@ def signup(request):
 
         return Response(
             {"token": token.key, "user": UserSerializer(user).data},
-            # {"token": token.key, "user": serializer.data},
             status=status.HTTP_201_CREATED,
         )
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
