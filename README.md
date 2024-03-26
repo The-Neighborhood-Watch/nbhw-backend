@@ -42,3 +42,11 @@ docker-compose build
 ```bash
 docker-compose up
 ```
+
+## Running the tests
+
+To run the tests, run the following command
+
+```bash
+docker-compose run tests
+```
