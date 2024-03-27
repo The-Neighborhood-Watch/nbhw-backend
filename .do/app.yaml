@@ -1,11 +1,11 @@
-name: neighborhood-watch
+name: neighborhood_watch
 services:
 - name: server
   github:
     repo: The-Neighborhood-Watch/nbhw-backend
     branch: static
     deploy_on_push: true
-  run_command: gunicorn --worker-tmp-dir /dev/shm mysite.wsgi
+  run_command: gunicorn --worker-tmp-dir /dev/shm neighborhood_watch.wsgi
   envs:
   - key: DISABLE_COLLECTSTATIC
     value: "1"
